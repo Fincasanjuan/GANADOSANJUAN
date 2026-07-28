@@ -1,0 +1,292 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #202124;
+  background: #f4f6f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f4f6f5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: none;
+  border-radius: 9px;
+  padding: 11px 16px;
+  cursor: pointer;
+  background: #218c4f;
+  color: white;
+  font-weight: 700;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.boton-secundario {
+  background: #444;
+}
+
+.boton-peligro {
+  background: #a83232;
+}
+
+/* ENCABEZADO */
+
+.encabezado {
+  text-align: center;
+  padding: 20px 15px 5px;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+.encabezado p {
+  margin-top: 8px;
+}
+
+/* MENÚ PRINCIPAL */
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+/* CONTENIDO */
+
+.contenedor {
+  width: min(1100px, 94%);
+  margin: 0 auto 40px;
+}
+
+.titulo-centro {
+  text-align: center;
+}
+
+/* PANEL PRINCIPAL */
+
+.grid-panel {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(180px, 1fr)
+  );
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.tarjeta-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 3px 14px
+    rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-panel strong {
+  display: block;
+  font-size: 32px;
+  margin-top: 10px;
+  color: #24613d;
+}
+
+/* LISTADO DE ANIMALES */
+
+.lista-animales {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(240px, 1fr)
+  );
+  gap: 16px;
+}
+
+.tarjeta-animal {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 3px 14px
+    rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-animal h3 {
+  margin-top: 10px;
+}
+
+.tarjeta-animal p {
+  margin: 8px 0;
+}
+
+/* BÚSQUEDA Y FILTROS */
+
+.barra-filtros {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.barra-filtros input,
+.barra-filtros select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  background: white;
+}
+
+/* FORMULARIOS */
+
+.formulario {
+  width: 100%;
+  max-width: 650px;
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 3px 14px
+    rgba(0, 0, 0, 0.08);
+}
+
+.formulario h3,
+.formulario h4 {
+  margin-top: 25px;
+}
+
+.formulario label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  background: white;
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+.formulario-interno {
+  margin: 18px auto;
+  background: #f8faf9;
+}
+
+/* FOTOGRAFÍAS */
+
+.foto-animal {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  margin: 10px auto;
+}
+
+.foto-grande {
+  width: 240px;
+  height: 240px;
+}
+
+/* FICHA E HISTORIALES */
+
+.seccion {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 18px;
+  box-shadow: 0 3px 14px
+    rgba(0, 0, 0, 0.1);
+}
+
+.registro {
+  border-top: 1px solid #ddd;
+  padding: 12px 0;
+}
+
+.registro:first-of-type {
+  margin-top: 15px;
+}
+
+/* BOTONES Y ACCIONES */
+
+.acciones-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+/* MENSAJES */
+
+.mensaje {
+  width: 100%;
+  max-width: 650px;
+  margin: 15px 0;
+  padding: 14px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 2px 10px
+    rgba(0, 0, 0, 0.08);
+}
+
+/* CELULAR Y PANTALLAS PEQUEÑAS */
+
+@media (max-width: 650px) {
+  .barra-filtros {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    padding: 10px;
+  }
+
+  .menu button {
+    width: 100%;
+  }
+
+  .contenedor {
+    width: 95%;
+  }
+
+  .formulario {
+    padding: 16px;
+  }
+
+  .acciones-centro button {
+    width: 100%;
+  }
+
+  .foto-grande {
+    width: 200px;
+    height: 200px;
+  }
+}
