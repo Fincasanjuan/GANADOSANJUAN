@@ -116,46 +116,54 @@ function Panel({ irA }) {
   }, []);
 
   const tarjetas = [
+  {
+  icono: "🐄",
+  titulo: "Total animales",
+  valor: resumen.total,
+  accion: () => irA("animales"),
+},
+{
+  icono: "🐮",
+  titulo: "Vacas",
+  valor: resumen.vacas,
+  accion: () => irA("animales"),
+},
+{
+  icono: "🐂",
+  titulo: "Toros",
+  valor: resumen.toros,
+  accion: () => irA("animales"),
+},
+   
     {
-      icono: "🐄",
-      titulo: "Total animales",
-      valor: resumen.total,
-    },
-    {
-      icono: "🐮",
-      titulo: "Vacas",
-      valor: resumen.vacas,
-    },
-    {
-      icono: "🐂",
-      titulo: "Toros",
-      valor: resumen.toros,
-    },
-    {
-      icono: "🐄",
-      titulo: "Novillas",
-      valor: resumen.novillas,
-    },
-    {
-      icono: "🐂",
-      titulo: "Novillos",
-      valor: resumen.novillos,
-    },
-    {
-      icono: "🐮",
-      titulo: "Terneras",
-      valor: resumen.terneras,
-    },
-    {
-      icono: "🐮",
-      titulo: "Terneros",
-      valor: resumen.terneros,
-    },
-    {
-      icono: "💉",
-      titulo: "Tratamientos",
-      valor: resumen.tratamientos,
-    },
+  icono: "🐄",
+  titulo: "Novillas",
+  valor: resumen.novillas,
+  accion: () => irA("animales"),
+},
+{
+  icono: "🐂",
+  titulo: "Novillos",
+  valor: resumen.novillos,
+  accion: () => irA("animales"),
+},
+{
+  icono: "🐮",
+  titulo: "Terneras",
+  valor: resumen.terneras,
+  accion: () => irA("animales"),
+},
+{
+  icono: "🐮",
+  titulo: "Terneros",
+  valor: resumen.terneros,
+  accion: () => irA("animales"),
+},
+{
+  icono: "💉",
+  titulo: "Tratamientos",
+  valor: resumen.tratamientos,
+},
     {
       icono: "❤️",
       titulo: "Reproducción",
@@ -201,9 +209,11 @@ function Panel({ irA }) {
       <div className="grid-panel">
         {tarjetas.map((tarjeta) => (
           <div
-            className="tarjeta-panel"
-            key={tarjeta.titulo}
-          >
+  className="tarjeta-panel"
+  key={tarjeta.titulo}
+  onClick={tarjeta.accion}
+  style={{ cursor: tarjeta.accion ? "pointer" : "default" }}
+>
             <div>
               {tarjeta.icono} {tarjeta.titulo}
             </div>
