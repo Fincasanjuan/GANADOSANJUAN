@@ -1,6 +1,7 @@
+import { read as leerAnimales, save, normalize as normalizarAnimal } from "../storage";
 import { useMemo, useState } from "react";
 
-const STORAGE_KEY = "animalesSanJuan";
+
 
 function hoy() {
   return new Date().toISOString().slice(0, 10);
@@ -17,57 +18,6 @@ function crearId() {
   return `${Date.now()}-${Math.random()
     .toString(36)
     .slice(2, 9)}`;
-}
-
-function normalizarAnimal(animal) {
-  return {
-    ...animal,
-
-    estado: animal.estado || "Activo",
-
-    pesos: Array.isArray(animal.pesos)
-      ? animal.pesos
-      : [],
-
-    salud: Array.isArray(animal.salud)
-      ? animal.salud
-      : [],
-
-    reproduccion: Array.isArray(
-      animal.reproduccion
-    )
-      ? animal.reproduccion
-      : [],
-
-    partos: Array.isArray(animal.partos)
-      ? animal.partos
-      : [],
-
-    leche: Array.isArray(animal.leche)
-      ? animal.leche
-      : [],
-  };
-}
-
-function leerAnimales() {
-  try {
-    const datos = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "[]"
-    );
-
-    if (!Array.isArray(datos)) {
-      return [];
-    }
-
-    return datos.map(normalizarAnimal);
-  } catch (error) {
-    console.error(
-      "Error leyendo animales:",
-      error
-    );
-
-    return [];
-  }
 }
 
 function Animales() {
@@ -97,10 +47,7 @@ function Animales() {
 
   function guardarLista(lista) {
     try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(lista)
-      );
+      save(lista, animales);
 
       setAnimales(lista);
 
@@ -112,7 +59,7 @@ function Animales() {
       );
 
       alert(
-        "No se pudieron guardar los cambios."
+        error.message
       );
 
       return false;
@@ -276,6 +223,7 @@ function Animales() {
       (animalActual) => ({
         ...animalActual,
 
+        papelera: [...(animalActual.papelera || []), { campo, registro: animalActual[campo].find(r => String(r.id) === String(id)), eliminado: new Date().toISOString() }],
         [campo]:
           animalActual[campo].filter(
             (registro) =>
@@ -535,6 +483,7 @@ function Animales() {
         />
       )}
 
+      <section className="seccion"><h3>Registros eliminados recuperables</h3>{(animal.papelera || []).map((entry,index)=><div className="registro" key={index}>{entry.campo} — {entry.registro.fecha || entry.eliminado}<button onClick={()=>actualizarAnimal(a=>({...a,[entry.campo]:[...a[entry.campo],entry.registro],papelera:a.papelera.filter((_,i)=>i!==index)}))}>Restaurar registro</button></div>)}</section>
       <h2>
         {animal.nombre || "Animal"} —
         Chapeta {animal.chapeta}
@@ -1627,6 +1576,7 @@ function FormularioAnimal({
 }) {
   const [formulario, setFormulario] =
     useState({
+      chapeta: datos.chapeta || "",
       nombre: datos.nombre || "",
 
       colorChapeta:
@@ -1688,6 +1638,7 @@ function FormularioAnimal({
       enviar={enviar}
       cancelar={cancelar}
     >
+      <label>Chapeta<input name="chapeta" required value={formulario.chapeta} onChange={cambiar}/></label>
       <label>
         Nombre
         <input

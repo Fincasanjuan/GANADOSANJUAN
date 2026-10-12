@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { Component, useState } from "react";
 import "./App.css";
 
 import Panel from "./pages/Panel";
 import Inicio from "./pages/Inicio";
 import Animales from "./pages/Animales";
 
+import Respaldos from "./pages/Respaldos";
+class Guard extends Component {
+ state={error:null};
+ static getDerivedStateFromError(error){return {error};}
+ render(){return this.state.error ? <div className="contenedor mensaje" role="alert">{this.state.error.message}</div> : this.props.children;}
+}
 function App() {
   const [pagina, setPagina] = useState("panel");
 
@@ -47,7 +53,8 @@ function App() {
         </button>
       </nav>
 
-      <main>
+      <nav className="menu"><button onClick={()=>cambiarPagina("respaldos")}>Respaldos y recuperación</button></nav>
+      <main><Guard key={pagina}>
         {pagina === "panel" && (
           <Panel irA={cambiarPagina} />
         )}
@@ -55,7 +62,8 @@ function App() {
         {pagina === "inicio" && <Inicio />}
 
         {pagina === "animales" && <Animales />}
-      </main>
+      {pagina === "respaldos" && <Respaldos />}
+      </Guard></main>
     </div>
   );
 }

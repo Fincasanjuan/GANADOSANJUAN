@@ -1,6 +1,7 @@
+import { read as leerAnimales, save } from "../storage";
 import { useState } from "react";
 
-const STORAGE_KEY = "animalesSanJuan";
+
 
 function crearId() {
   if (
@@ -13,19 +14,6 @@ function crearId() {
   return `${Date.now()}-${Math.random()
     .toString(36)
     .slice(2, 9)}`;
-}
-
-function leerAnimales() {
-  try {
-    const datos = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "[]"
-    );
-
-    return Array.isArray(datos) ? datos : [];
-  } catch (error) {
-    console.error("Error leyendo animales:", error);
-    return [];
-  }
 }
 
 function Inicio() {
@@ -82,7 +70,7 @@ function Inicio() {
       return;
     }
 
-    if (!archivo.type.startsWith("image/")) {
+    if (!["image/png", "image/jpeg", "image/webp", "image/gif"].includes(archivo.type)) {
       setMensaje(
         "⚠️ El archivo seleccionado debe ser una imagen."
       );
@@ -156,7 +144,8 @@ function Inicio() {
       return;
     }
 
-    const animales = leerAnimales();
+    let animales;
+    try { animales = leerAnimales(); } catch(error) { setMensaje(error.message); return; }
 
     const chapetaRepetida = animales.some(
       (animal) =>
@@ -248,10 +237,7 @@ function Inicio() {
         nuevoAnimal,
       ];
 
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(actualizados)
-      );
+      save(actualizados, animales);
 
       setFormulario(formularioInicial);
 

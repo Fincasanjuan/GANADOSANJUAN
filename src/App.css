@@ -289,4 +289,10 @@ button:hover {
     width: 200px;
     height: 200px;
   }
-}
+}/* Controles legibles y cómodos en móvil */
+button { min-height: 44px; }
+input, select, textarea { font-size: 16px; max-width: 100%; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #b77a00; outline-offset: 3px; }
+.seccion, .registro, .mensaje { overflow-wrap: anywhere; }
+.registro button { margin: 6px; }
+@media (max-width: 650px) { .grid-panel { grid-template-columns: repeat(2, minmax(0,1fr)); } .tarjeta-panel { padding: 12px; } }

@@ -1,19 +1,7 @@
+import { read as leerAnimales } from "../storage";
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "animalesSanJuan";
 
-function leerAnimales() {
-  try {
-    const datos = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "[]"
-    );
-
-    return Array.isArray(datos) ? datos : [];
-  } catch (error) {
-    console.error("Error leyendo animales:", error);
-    return [];
-  }
-}
 
 function convertirNumero(valor) {
   const numero = Number(
